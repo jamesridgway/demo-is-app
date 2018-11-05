@@ -1,0 +1,15 @@
+.idea/
+!/log/.keep
+!/storage/.keep
+!/tmp/.keep
+.byebug_history
+/.bundle
+/config/master.key
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*
+/node_modules
+/public/assets
+/storage/*
+/tmp/*
+/yarn-error.log

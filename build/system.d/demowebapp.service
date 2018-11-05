@@ -1,0 +1,17 @@
+[Unit]
+Description=Demo Web App
+Requires=network.target
+
+[Service]
+Type=simple
+User=webapp
+Group=webapp
+Environment=RAILS_ENV=production
+WorkingDirectory=/srv/demowebapp
+ExecStart=/bin/bash -lc '/srv/demowebapp/build/run.sh'
+TimeoutSec=30
+RestartSec=15s
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
