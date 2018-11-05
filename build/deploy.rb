@@ -2,13 +2,16 @@ require 'aws-sdk'
 require 'base64'
 require 'logger'
 require 'json'
+require 'net/http'
 
 $stdout.sync = true
 logger = Logger.new($stdout)
 
-ec2 = Aws::EC2::Client.new
-elbv2 = Aws::ElasticLoadBalancingV2::Client.new
-iam = Aws::IAM::Client.new
+aws_region = JSON.parse(Net::HTTP.get(URI("http://169.254.169.254/latest/dynamic/instance-identity/document")))["region"]
+
+ec2 = Aws::EC2::Client.new(region: aws_region)
+elbv2 = Aws::ElasticLoadBalancingV2::Client.new(region: aws_region)
+iam = Aws::IAM::Client.new(region: aws_region)
 
 packer_manifest = JSON.parse(File.read('manifest.json'))
 ami_id = packer_manifest['builds'][0]['artifact_id'].split(':')[1]

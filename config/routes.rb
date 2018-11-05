@@ -6,6 +6,6 @@ Rails.application.routes.draw do
       resources :version, only: :index
     end
   end
-  
+
   root 'welcome#index'
 end
