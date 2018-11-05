@@ -34,14 +34,17 @@
   <tr>
     <td>Hourly:</td>
     <td>$<%=@aws_instance_info.get_on_demand_price(:hourly)%></td>
+    <td>$<%=@aws_instance_info.get_spot_price(:hourly)%></td>
   </tr>
   <tr>
     <td>Daily:</td>
     <td>$<%=@aws_instance_info.get_on_demand_price(:daily)%></td>
+    <td>$<%=@aws_instance_info.get_spot_price(:daily)%></td>
   </tr>
   <tr>
     <td>Monthly:</td>
     <td>$<%=@aws_instance_info.get_on_demand_price(:monthly)%></td>
+    <td>$<%=@aws_instance_info.get_spot_price(:monthly)%></td>
   </tr>
   </tbody>
 </table>
