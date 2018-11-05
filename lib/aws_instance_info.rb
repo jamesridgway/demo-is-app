@@ -4,7 +4,6 @@ require 'net/http'
 class AwsInstanceInfo
 
   def initialize
-    @ec2 = Aws::EC2::Client.new
   end
 
   def get_instance_type
@@ -106,8 +105,9 @@ class AwsInstanceInfo
 
   def calculate_spot_price
     return 0 if instance_identity.empty?
-    launch_time = @ec2.describe_instances({instance_ids: [get_instance_id]}).reservations[0].instances[0].launch_time
-    @ec2.describe_spot_price_history({
+    ec2 = Aws::EC2::Client.new(region: instance_identity['region'])
+    launch_time = ec2.describe_instances({instance_ids: [get_instance_id]}).reservations[0].instances[0].launch_time
+    ec2.describe_spot_price_history({
                                          end_time: launch_time,
                                          instance_types: [
                                              get_instance_type,
