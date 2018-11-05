@@ -20,4 +20,6 @@ EOF
 
 sudo mkdir -p /usr/lib/systemd/system
 cp /srv/demowebapp/build/system.d/demowebapp.service /usr/lib/systemd/system/demowebapp.service
+cp /srv/demowebapp/build/user-data.sh /etc/rc.local
+chmod +x /etc/rc.local
 systemctl enable demowebapp.service
