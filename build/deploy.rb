@@ -36,6 +36,8 @@ end
 
 iam_fleet_role = iam.get_role({role_name: 'aws-ec2-spot-fleet-tagging-role'}).role.arn
 
+website_role = iam.get_role({role_name: 'website'}).role.arn
+
 default_sg_id = ec2.describe_security_groups({
                                                  filters: [
                                                      {
@@ -60,6 +62,7 @@ rails_app_sg_id = ec2.describe_security_groups({
 
 
 logger.info("IAM Fleet Role ARN: #{iam_fleet_role}")
+logger.info("Website Role ARN: #{website_role}")
 logger.info("Default Security Group: #{default_sg_id}")
 logger.info("Rails App Security Group: #{rails_app_sg_id}")
 
@@ -83,6 +86,10 @@ response = ec2.request_spot_fleet({
                                                           group_id: rails_app_sg_id
                                                       }
                                                   ],
+                                                  iam_instance_profile: {
+                                                      arn: website_role,
+                                                      name: "website",
+                                                  },
                                                   image_id: ami_id,
                                                   instance_type: "t3.micro",
                                                   key_name: "demo",
