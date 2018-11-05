@@ -1,1 +1,47 @@
-<p>Hello world!</p>
+<p>This is an example of a web server that has been deployed follow the immutable servers pattern.</p>
+<p>This web server has been launched from the AMI that was produced as the only build artifact of the project pipeline.</p>
+<h2>Details</h2>
+<p>Here are some details about the AMI:</p>
+<table cellpadding="5" cellspacing="2" align="center" width="500">
+  <thead bgcolor="#0292C7">
+    <th width="150"><font color="#FFFFFF">Attribute</font></th>
+    <th><font color="#FFFFFF">Value</font></th>
+  </thead>
+  <tbody bgcolor="#EEEEEE">
+    <tr>
+      <td>Region:</td>
+      <td><%=@aws_instance_info.get_region%></td>
+    </tr>
+    <tr>
+      <td>Instance ID:</td>
+      <td><%=@aws_instance_info.get_instance_id%></td>
+    </tr>
+    <tr>
+      <td>Instance Type:</td>
+      <td><%=@aws_instance_info.get_instance_type%></td>
+    </tr>
+  </tbody>
+</table>
+<h2>Pricing</h2>
+<p>Here is a comparison of prices between on-demand and spot-instances</p>
+<table cellpadding="5" cellspacing="2" align="center" width="500">
+  <thead bgcolor="#0292C7">
+  <th width="100"><font color="#FFFFFF">Period</font></th>
+  <th><font color="#FFFFFF">On-demand</font></th>
+  <th><font color="#FFFFFF">Spot</font></th>
+  </thead>
+  <tbody bgcolor="#EEEEEE">
+  <tr>
+    <td>Hourly:</td>
+    <td>$<%=@aws_instance_info.get_on_demand_price(:hourly)%></td>
+  </tr>
+  <tr>
+    <td>Daily:</td>
+    <td>$<%=@aws_instance_info.get_on_demand_price(:daily)%></td>
+  </tr>
+  <tr>
+    <td>Monthly:</td>
+    <td>$<%=@aws_instance_info.get_on_demand_price(:monthly)%></td>
+  </tr>
+  </tbody>
+</table>

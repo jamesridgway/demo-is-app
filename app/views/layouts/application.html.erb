@@ -7,12 +7,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Sintony" rel="stylesheet">
   </head>
 
   <body>
-    <%= yield %>
-    <footer>
-      Version: <%=@git_version_info.commit_short%>
-    </footer>
+    <div class="wrapper">
+      <header>
+        <h1>Immutable Servers Demo</h1>
+      </header>
+      <div class="content">
+        <%= yield %>
+      </div>
+      <footer>
+        <a href="https://github.com/jamesridgway/demo-is-app">demo-is-app</a> is a projectg by <a href="https://www.james-ridgway.co.uk">James Ridgway</a>
+        Version: <%=@git_version_info.commit_short%>
+      </footer>
+    </div>
   </body>
 </html>
