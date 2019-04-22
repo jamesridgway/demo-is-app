@@ -7,7 +7,12 @@ require 'net/http'
 $stdout.sync = true
 logger = Logger.new($stdout)
 
-aws_region = JSON.parse(Net::HTTP.get(URI("http://169.254.169.254/latest/dynamic/instance-identity/document")))["region"]
+aws_region = begin
+  JSON.parse(Net::HTTP.get(URI("http://169.254.169.254/latest/dynamic/instance-identity/document")))["region"]
+rescue Errno::EHOSTUNREACH
+  logger.info("No route to host for AWS meta-data (169.254.169.254), assuming running as localhost and defaulting to eu-west-1 region")
+  'eu-west-1'
+end
 
 ec2 = Aws::EC2::Client.new(region: aws_region)
 elbv2 = Aws::ElasticLoadBalancingV2::Client.new(region: aws_region)
