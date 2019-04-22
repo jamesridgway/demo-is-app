@@ -2,8 +2,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "access_key": "{{user `aws_access_key`}}",
-      "secret_key": "{{user `aws_secret_key`}}",
+      "profile": "demo",
       "region": "eu-west-1",
       "instance_type": "t3.small",
       "ssh_username": "ubuntu",
@@ -19,7 +18,7 @@
       "tags": {
         "Name": "demo-web-app",
         "Project": "demo-web-app",
-        "Commit": "unknown"
+        "Commit": "{{user `commit`}}"
       }
     }
   ],

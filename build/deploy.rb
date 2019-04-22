@@ -13,8 +13,7 @@ ec2 = Aws::EC2::Client.new(region: aws_region)
 elbv2 = Aws::ElasticLoadBalancingV2::Client.new(region: aws_region)
 iam = Aws::IAM::Client.new(region: aws_region)
 
-packer_manifest = JSON.parse(File.read('manifest.json'))
-ami_id = packer_manifest['builds'][0]['artifact_id'].split(':')[1]
+ami_id = ARGV[0]
 logger.info("AMI ID: #{ami_id}")
 
 WEBSITE_TARGET_GROUP_ARN = elbv2.describe_target_groups({names: ['website']}).target_groups[0].target_group_arn
