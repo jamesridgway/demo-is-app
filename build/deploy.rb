@@ -162,6 +162,7 @@ until target_group_resp.target_health_descriptions.all? {|thd| thd.target_health
     logger.error("#{unhealthy_instances} unhealthy instances! aborting...")
     ec2.cancel_spot_fleet_requests(spot_fleet_request_ids: [response.spot_fleet_request_id], terminate_instances: true)
     logger.error("Cancelled new fleet request (id: #{response.spot_fleet_request_id})")
+    abort
   end
 
   if total_instances != healthy_instances
