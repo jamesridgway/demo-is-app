@@ -2,6 +2,7 @@
 set -e
 
 gem install bundler
+gem update --system
 sudo chown -R webapp:webapp /srv/demowebapp
 
 (
